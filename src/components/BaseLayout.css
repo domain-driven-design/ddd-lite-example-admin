@@ -1,0 +1,29 @@
+.site-layout {
+    height: 100vh;
+}
+
+.logo {
+    height: 32px;
+    margin: 16px;
+    font-size: 27px;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout-header {
+    background: #fff;
+    padding: 0;
+}
+
+.site-layout-content {
+    margin: 24px 16px 0;
+}
+
+.site-layout-background {
+    background: #fff;
+    padding: 24px;
+    height: 100%;
+}
+
+.site-layout-footer {
+    text-align: center;
+}
