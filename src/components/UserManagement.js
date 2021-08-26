@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "../common/axios";
-import {Button, message, Col, Pagination, Row} from "antd";
+import {Button, message, Col, Pagination, Row, Input} from "antd";
 
 import "./UserManagement.css"
+
+const { Search } = Input;
 
 export default function UserManagement(props) {
 
@@ -37,8 +39,18 @@ export default function UserManagement(props) {
         setPage(page);
     }
 
+    function onSearch() {
+
+    }
+
     return (
         <div>
+            <div className="user-management-header">
+                <Search allowClear onSearch={onSearch} style={{ width: "50%" }}/>
+                <Button type="primary">
+                    创建用户
+                </Button>
+            </div>
             {content.map((item) => (
                 <div className="user-management-item">
                     <Row>

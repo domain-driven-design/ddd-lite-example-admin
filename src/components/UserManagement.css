@@ -1,3 +1,8 @@
+.user-management-header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .user-management-item {
     background-color: lightgray;
     margin: 16px 0;
