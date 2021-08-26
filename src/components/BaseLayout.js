@@ -18,9 +18,9 @@ export default function BaseLayout(props) {
                 }}
             >
                 <div className="logo">问答平台后台</div>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                    <Menu.Item key="1">
-                        用户管理
+                <Menu theme="dark" mode="inline" defaultSelectedKeys={props.location.pathname}>
+                    <Menu.Item key="/users">
+                        <Link to="/users">用户管理</Link>
                     </Menu.Item>
                     <Menu.Item key="2">
                         问题管理

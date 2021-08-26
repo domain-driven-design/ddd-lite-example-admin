@@ -2,8 +2,8 @@ import './App.css';
 import "antd/dist/antd.css";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Login from "./components/Login";
-import Home from "./components/Home";
 import BaseLayout from "./components/BaseLayout";
+import UserManagement from "./components/UserManagement";
 
 function App() {
     return (
@@ -11,7 +11,10 @@ function App() {
             <Switch>
                 <Route path="/login" component={Login}/>
                 <BaseLayout>
-                    <Route path="/" component={Home}/>
+                    <Switch>
+                        <Route path="/users" component={UserManagement}/>
+                        <Route path="/" component={UserManagement}/>
+                    </Switch>
                 </BaseLayout>
             </Switch>
         </Router>
