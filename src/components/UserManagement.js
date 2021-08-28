@@ -9,18 +9,21 @@ const { Search } = Input;
 export default function UserManagement(props) {
 
     const size = 10;
+    const [keyword, setKeyword] = useState();
     const [content, setContent] = useState([]);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
-        getUsers(page, size);
-    }, [page]);
+        suggestUsers(keyword, page, size);
+    }, [keyword, page]);
 
-    function getUsers(page, size) {
+    function suggestUsers(keyword, page, size) {
+        console.log("suggest")
         axios
-            .get("/management/users", {
+            .get("/management/users/suggest", {
                 params: {
+                    keyword,
                     page: page - 1,
                     size,
                     sort: "createdAt,desc",
@@ -39,8 +42,9 @@ export default function UserManagement(props) {
         setPage(page);
     }
 
-    function onSearch() {
-
+    function onSearch(value) {
+        setPage(0);
+        setKeyword(value);
     }
 
     return (

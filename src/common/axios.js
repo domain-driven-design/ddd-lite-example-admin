@@ -7,7 +7,6 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
-      console.log("request interceptors")
     if (window.localStorage.getItem("token")) {
       config.headers["Authorization"] = `Bearer ${window.localStorage.getItem(
         "token"
