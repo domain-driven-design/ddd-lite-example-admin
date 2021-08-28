@@ -1,10 +1,22 @@
 import {Link} from "react-router-dom";
 import {Layout, Menu} from "antd";
 import "./BaseLayout.css";
+import axios from "../common/axios";
 
 const {Header, Sider, Content, Footer} = Layout;
 
 export default function BaseLayout(props) {
+    function logout() {
+        axios.delete("/authorizes/admin")
+            .then((data) => {
+                window.localStorage.removeItem("token");
+                window.localStorage.removeItem("userId");
+            })
+            .catch(function (error) {
+                props.history.push("/login");
+            });
+    }
+
     return (
         <Layout className="site-layout">
             <Sider
@@ -34,7 +46,10 @@ export default function BaseLayout(props) {
                 </Menu>
             </Sider>
             <Layout>
-                <Header className="site-layout-header"/>
+                <Header className="site-layout-header">
+                    <div/>
+                    <Link to="/login" onClick={() => logout()}>退出登录</Link>
+                </Header>
                 <Content className="site-layout-content">
                     <div className="site-layout-background">
                         {props.children}

@@ -52,7 +52,7 @@ export default function UserManagement(props) {
                 </Button>
             </div>
             {content.map((item) => (
-                <div className="user-management-item">
+                <div key={item.id} className="user-management-item">
                     <Row>
                         <Col span={8}>{item.name}</Col>
                         <Col span={8}>{item.email}</Col>

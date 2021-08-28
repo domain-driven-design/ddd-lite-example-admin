@@ -7,6 +7,7 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config) => {
+      console.log("request interceptors")
     if (window.localStorage.getItem("token")) {
       config.headers["Authorization"] = `Bearer ${window.localStorage.getItem(
         "token"
@@ -21,15 +22,15 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response) => {
-    if (response.status === 401) {
-      message.error("认证失败，请重新登录");
-      return Promise.reject("error");
-    } else {
       return response.data;
-    }
   },
   (error) => {
-    return Promise.reject(error);
+      if (error.response.status === 401) {
+          message.error("认证失败，请重新登录");
+      } else {
+          message.error(error.response.data.message)
+      }
+      return Promise.reject(error);
   }
 );
 
