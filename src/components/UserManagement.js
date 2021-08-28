@@ -3,6 +3,7 @@ import axios from "../common/axios";
 import {Button, message, Col, Pagination, Row, Input} from "antd";
 
 import "./UserManagement.css"
+import CreateUser from "./CreateUser";
 
 const { Search } = Input;
 
@@ -19,7 +20,6 @@ export default function UserManagement(props) {
     }, [keyword, page]);
 
     function suggestUsers(keyword, page, size) {
-        console.log("suggest")
         axios
             .get("/management/users/suggest", {
                 params: {
@@ -47,13 +47,16 @@ export default function UserManagement(props) {
         setKeyword(value);
     }
 
+    function OnCreateUserSuccess() {
+        setPage(0);
+        setKeyword(null);
+    }
+
     return (
         <div>
             <div className="user-management-header">
                 <Search allowClear onSearch={onSearch} style={{ width: "50%" }}/>
-                <Button type="primary">
-                    创建用户
-                </Button>
+                <CreateUser OnCreateUserSuccess={OnCreateUserSuccess}/>
             </div>
             {content.map((item) => (
                 <div key={item.id} className="user-management-item">
