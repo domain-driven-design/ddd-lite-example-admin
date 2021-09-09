@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import axios from "../common/axios";
-import {Button, message, Col, Pagination, Row, Input} from "antd";
+import {Button, Col, Input, message, Pagination, Row} from "antd";
 
 import "./UserManagement.css"
 import CreateUser from "./CreateUser";
 
-const { Search } = Input;
+const {Search} = Input;
 
 export default function UserManagement(props) {
 
@@ -52,10 +52,18 @@ export default function UserManagement(props) {
         setKeyword(null);
     }
 
+    function frozenUser(userId) {
+
+    }
+
+    function unFrozenUser(userId) {
+
+    }
+
     return (
         <div>
             <div className="user-management-header">
-                <Search allowClear onSearch={onSearch} style={{ width: "50%" }}/>
+                <Search allowClear onSearch={onSearch} style={{width: "50%"}}/>
                 <CreateUser OnCreateUserSuccess={OnCreateUserSuccess}/>
             </div>
             {content.map((item) => (
@@ -65,9 +73,11 @@ export default function UserManagement(props) {
                         <Col span={8}>{item.email}</Col>
                         <Col span={6}>{item.createdAt}</Col>
                         <Col span={2}>
-                            <Button type="primary">
-                                查看详情
-                            </Button>
+                            {
+                                item.status === 'NORMAL'
+                                    ? <Button type="primary" onClick={() => frozenUser(item.id)}>冻结</Button>
+                                    : <Button type="primary" onClick={() => unFrozenUser(item.id)}>解冻</Button>
+                            }
                         </Col>
                     </Row>
                 </div>
