@@ -4,7 +4,9 @@
 }
 
 .user-management-item {
-    background-color: lightgray;
     margin: 16px 0;
     padding: 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
 }

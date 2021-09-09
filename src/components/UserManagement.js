@@ -21,7 +21,7 @@ export default function UserManagement(props) {
 
     function suggestUsers(keyword, page, size) {
         axios
-            .get("/management/users/suggest", {
+            .get("/management/users", {
                 params: {
                     keyword,
                     page: page - 1,
