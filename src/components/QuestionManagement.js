@@ -48,27 +48,33 @@ export default function QuestionManagement(props) {
         setKeyword(value);
     }
 
-    function closeQuestion(userId) {
+    function closeQuestion(questionId, groupId) {
         axios
-            .put(`/management/question/${userId}/status`, {"status": "FROZEN"})
+            .put(`/management/questions/${questionId}/status`,
+                {"status": "CLOSED"},
+                {headers: {"Group-ID": groupId}}
+            )
             .then(function (response) {
                 message.success("关闭问题成功");
                 suggestQuestions(keyword, page, size)
             })
     }
 
-    function openQuestion(userId) {
+    function openQuestion(questionId, groupId) {
         axios
-            .put(`/management/question/${userId}/status`, {"status": "NORMAL"})
+            .put(`/management/questions/${questionId}/status`,
+                {"status": "OPENED"},
+                {headers: {"Group-ID": groupId}}
+            )
             .then(function (response) {
                 message.success("打开问题成功");
                 suggestQuestions(keyword, page, size)
             })
     }
 
-    function deleteQuestion(userId) {
+    function deleteQuestion(questionId, groupId) {
         axios
-            .delete(`/management/question/${userId}/status`)
+            .delete(`/management/questions/${questionId}`, {headers: {"Group-ID": groupId}})
             .then(function (response) {
                 message.success("删除问题成功");
                 suggestQuestions(keyword, page, size)
@@ -108,10 +114,10 @@ export default function QuestionManagement(props) {
             render: (text, record) =>
                 <Space size="middle">
                     {record.status === 'OPENED'
-                        ? <Button type="primary" onClick={() => closeQuestion(record.id)}>关闭</Button>
-                        : <Button type="primary" onClick={() => openQuestion(record.id)}>打开</Button>
+                        ? <Button type="primary" onClick={() => closeQuestion(record.id, record.group.id)}>关闭</Button>
+                        : <Button type="primary" onClick={() => openQuestion(record.id, record.group.id)}>打开</Button>
                     }
-                    <Button type="primary" danger onClick={() => deleteQuestion(record.id)}>删除</Button>
+                    <Button type="primary" danger onClick={() => deleteQuestion(record.id, record.group.id)}>删除</Button>
                 </Space>
             ,
         },
