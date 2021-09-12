@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "../common/axios";
-import {Button, Col, Input, message, Pagination, Row} from "antd";
+import {Button, Input, message, Table} from "antd";
 
 import "./UserManagement.css"
 import CreateUser from "./CreateUser";
@@ -9,7 +9,7 @@ const {Search} = Input;
 
 export default function UserManagement(props) {
 
-    const size = 10;
+    const size = 2;
     const [keyword, setKeyword] = useState();
     const [content, setContent] = useState([]);
     const [page, setPage] = useState(1);
@@ -70,34 +70,49 @@ export default function UserManagement(props) {
             })
     }
 
+    const columns = [
+        {
+            title: '姓名',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: '邮箱',
+            dataIndex: 'email',
+            key: 'email',
+        },
+        {
+            title: '创建时间',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+        },
+        {
+            title: '操作',
+            key: 'action',
+            render: (text, record) =>
+                record.status === 'NORMAL'
+                    ? <Button type="primary" onClick={() => frozenUser(record.id)}>冻结</Button>
+                    : <Button type="primary" onClick={() => unFrozenUser(record.id)}>解冻</Button>
+            ,
+        },
+    ];
+
     return (
         <div>
             <div className="user-management-header">
                 <Search allowClear onSearch={onSearch} style={{width: "50%"}}/>
                 <CreateUser OnCreateUserSuccess={OnCreateUserSuccess}/>
             </div>
-            {content.map((item) => (
-                <div key={item.id} className="user-management-item">
-                    <Row>
-                        <Col span={8}>{item.name}</Col>
-                        <Col span={8}>{item.email}</Col>
-                        <Col span={6}>{item.createdAt}</Col>
-                        <Col span={2}>
-                            {
-                                item.status === 'NORMAL'
-                                    ? <Button type="primary" onClick={() => frozenUser(item.id)}>冻结</Button>
-                                    : <Button type="primary" onClick={() => unFrozenUser(item.id)}>解冻</Button>
-                            }
-                        </Col>
-                    </Row>
-                </div>
-            ))}
-            <Pagination
-                className="pagination"
-                defaultCurrent={page}
-                defaultPageSize={size}
-                total={total}
-                onChange={onChange}
+            <Table
+                columns={columns}
+                dataSource={content}
+                pagination={{
+                    defaultCurrent: page,
+                    defaultPageSize: size,
+                    total: total,
+                    onChange: onChange
+                }}
+                rowKey="id"
             />
         </div>
     );
