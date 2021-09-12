@@ -53,11 +53,21 @@ export default function UserManagement(props) {
     }
 
     function frozenUser(userId) {
-
+        axios
+            .put(`/management/users/${userId}/status`, {"status": "FROZEN"})
+            .then(function (response) {
+                message.success("冻结成功");
+                suggestUsers(keyword, page, size)
+            })
     }
 
     function unFrozenUser(userId) {
-
+        axios
+            .put(`/management/users/${userId}/status`, {"status": "NORMAL"})
+            .then(function (response) {
+                message.success("解冻成功");
+                suggestUsers(keyword, page, size)
+            })
     }
 
     return (
