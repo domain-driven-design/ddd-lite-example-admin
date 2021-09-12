@@ -35,7 +35,7 @@ export default function BaseLayout(props) {
                         <Link to="/users">用户管理</Link>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        问题管理
+                        <Link to="/questions">问题管理</Link>
                     </Menu.Item>
                     <Menu.Item key="3">
                         回答管理

@@ -100,7 +100,7 @@ export default function UserManagement(props) {
     return (
         <div>
             <div className="user-management-header">
-                <Search allowClear onSearch={onSearch} style={{width: "50%"}}/>
+                <Search allowClear placeholder="姓名 / 邮箱" onSearch={onSearch} style={{width: "50%"}}/>
                 <CreateUser OnCreateUserSuccess={OnCreateUserSuccess}/>
             </div>
             <Table

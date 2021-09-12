@@ -1,0 +1,5 @@
+.question-management-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+}
