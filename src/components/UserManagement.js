@@ -9,7 +9,7 @@ const {Search} = Input;
 
 export default function UserManagement(props) {
 
-    const size = 2;
+    const size = 10;
     const [keyword, setKeyword] = useState();
     const [content, setContent] = useState([]);
     const [page, setPage] = useState(1);

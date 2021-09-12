@@ -1,12 +1,5 @@
 .user-management-header {
     display: flex;
     justify-content: space-between;
-}
-
-.user-management-item {
     margin: 16px 0;
-    padding: 16px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: lightgray;
 }
